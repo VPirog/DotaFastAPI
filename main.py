@@ -3,12 +3,8 @@ from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
 from endpoints import user_router
 
-
 app = FastAPI()
 app.include_router(user_router)
-
-
-app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 
 
 # @app.get("/")
@@ -19,6 +15,7 @@ app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app",

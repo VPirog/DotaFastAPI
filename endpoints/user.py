@@ -6,7 +6,6 @@ from models import UserIn, UserOut, UsersOut
 from database import get_session, User
 
 router = APIRouter(prefix="/user", tags=["user"])
-templates = Jinja2Templates(directory="templates")
 
 
 @router.get("/{user_id}", response_model=UserOut)
