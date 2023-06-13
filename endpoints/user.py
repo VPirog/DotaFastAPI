@@ -20,6 +20,14 @@ async def get_user(user_id: int,
                             detail=f"User with id {user_id} not found!")
 
 
+# @router.get("/get_all", response_model=UserOut)
+# async def get_all(session: Session = Depends(get_session)):
+#     session = get_session()
+#     users: User = session.query(User).all()
+#     user_dto = list(map(lambda user: UserOut(**user.__dict__), users))
+#     return UsersOut(users=user_dto)
+
+
 @router.post("/", response_model=UserOut)
 async def create_user(user: UserIn):
     session = get_session()
