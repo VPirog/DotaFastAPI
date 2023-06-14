@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from pydantic_sqlalchemy import sqlalchemy_to_pydantic
 
 from database import Guide
+from models.commentary import CommentsOut
 
 GuideOut = sqlalchemy_to_pydantic(Guide)
 
@@ -17,4 +18,4 @@ print(GuideIn.__fields__)
 
 
 class GuidesOut(BaseModel):
-    students: List[GuideOut]
+    comments: List[CommentsOut]

@@ -46,16 +46,17 @@ async def delete_guide(guide_id: int,
 
 
 @router.put("/update/{guide_id}")
-async def update_guide(guide: GuideIn,
-                      guide_id: int,
-                      session: Session = Depends(get_session)):
+async def update_guide(guide_id: int, guide: GuideIn, session: Session = Depends(get_session)):
     server_guide: Guide = session.query(Guide).get(guide_id)
-    if guide:
-        server_guide.guidename = guide.guidename
-        server_guide.password = guide.password
-        server_guide.country = guide.country
+    if server_guide:
+        server_guide.name = guide.name
+        server_guide.rating = guide.rating
+        server_guide.description = guide.description
+        server_guide.owner_user_id = guide.owner_user_id
+        server_guide.hero_id = guide.hero_id
+        server_guide.main_text = guide.main_text
         session.commit()
-        return GuideOut(**server_guide.__dict__)
+        return GuideOut(id=server_guide.id, name=server_guide.name, rating=server_guide.rating, description=server_guide.description,
+                        owner_user_id=server_guide.owner_user_id, hero_id=server_guide.hero_id, main_text=server_guide.main_text)
     else:
-        raise HTTPException(status_code=404,
-                            detail=f"Guide with id {guide_id} not found!")
+        raise HTTPException(status_code=404, detail=f"Guide with id {guide_id} not found!")
