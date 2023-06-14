@@ -1,12 +1,14 @@
 import uvicorn
 from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
-from endpoints import user_router, guide_router, commentary_router
+from endpoints import user_router, guide_router, commentary_router, hero_router
 
 app = FastAPI()
 app.include_router(user_router)
 app.include_router(guide_router)
 app.include_router(commentary_router)
+app.include_router(hero_router)
+
 
 
 
